@@ -21,23 +21,36 @@ public class changeFAQtoSpanish {
     FAQPage faqPage;
 
     @BeforeTest
-  /*  public void setUp(){
+    public void setUp(){
+        System.setProperty("Pages.gecko.driver", "C:\\Webdrivers\\GeckoDriver\\geckodriver.exe");
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("www.boxed.com");
-    }*/
+    }
 
     @Test
 
     public void changeFAQtoSpanishandVerify()
 
     {
+       
         driver.get("https://www.boxed.com");
 
-        //loginPage= new LoginPage(driver);
+        loginPage= new LoginPage(driver);
         loginPage.enterEmailNavtoHomePage();
-       // System.setProperty("Pages.gecko.driver", "C:\\Webdrivers\\GeckoDriver\\geckodriver.exe");
         System.out.print("Poop");
+
+        homePage = new LoginPage(driver);
+        homePage.clickFAQLink();
+        
+        faqPage = new FAQPage(driver);
+        faqPage.clickEspanolToggle();
+        Assert.assertTrue(faqPage.getGeneralQuestionsText().toLowerCase().contains("Preguntas Generales"));
+        
+        System.out.println("Language has sucessfully been changed to Spanish);
+        driver.close();
+        
+        
 
 
 
